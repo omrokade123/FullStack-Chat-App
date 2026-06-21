@@ -20,8 +20,11 @@ const App = () => {
     checkAuth()
   },[checkAuth]);
   if(isCheckingAuth && !authUser) return (
-    <div className='flex items-center justify-center h-screen'>
-      <Loader className="size-10 animate-spin"/>
+    <div className='flex items-center justify-center h-screen bg-gradient-to-br from-base-100 to-base-200'>
+      <div className="text-center space-y-4">
+        <Loader className="size-12 animate-spin text-primary mx-auto"/>
+        <p className="text-base-content/60 font-medium">Loading Chatty...</p>
+      </div>
     </div>
   )
   return (

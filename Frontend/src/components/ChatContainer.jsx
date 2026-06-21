@@ -29,7 +29,7 @@ const ChatContainer = () => {
   }, [messages]);
 
   if(isMessagesLoading)  return (
-    <div className='flex-1 flex flex-col overflow-auto'>
+    <div className='flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-base-100 to-base-200/20'>
        <ChatHeader/>
        <MessageSkeleton/>
        <MessageInput/>
@@ -37,10 +37,10 @@ const ChatContainer = () => {
   )
 
   return (
-    <div className='flex-1 flex flex-col overflow-hidden'>
+    <div className='flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-base-100 via-base-100 to-base-200/20'>
         <ChatHeader/>
          
-         <div className='flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-4'>
+         <div className='flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-4 scroll-smooth'>
           {messages.map((message) => (
           <div
             key={message._id}
@@ -60,16 +60,20 @@ const ChatContainer = () => {
               </div>
             </div>
             <div className="chat-header mb-1">
-              <time className="text-xs opacity-50 ml-1">
+              <time className="text-xs opacity-60 ml-1 font-medium">
                 {formatMessageTime(message.createdAt)}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col text-sm sm:text-base">
+            <div className={`chat-bubble flex flex-col text-sm sm:text-base rounded-2xl shadow-sm transition-all duration-300 ${
+              message.senderId === authUser._id
+                ? "bg-gradient-to-br from-primary to-primary/80 text-primary-content"
+                : "bg-base-200 text-base-content"
+            }`}>
               {message.image && (
                 <img
                   src={message.image}
                   alt="Attachment"
-                  className="max-w-[150px] sm:max-w-[200px] rounded-md mb-2"
+                  className="max-w-[150px] sm:max-w-[200px] rounded-xl mb-2 shadow-sm hover:shadow-md transition-shadow duration-300"
                 />
               )}
               {message.text && <p className="break-words">{message.text}</p>}

@@ -7,10 +7,10 @@ import ChatContainer from '../components/ChatContainer';
 const HomePage = () => {
   const {selectedUser}=useChatStore();
   return (
-    <div className='h-screen bg-base-200'>
+    <div className='h-screen bg-gradient-to-br from-base-100 via-base-100 to-base-200/20'>
       <div className='flex items-center justify-center pt-16 sm:pt-20 px-2 sm:px-4'>
-        <div className='bg-base-100 rounded-lg shadow-cl w-full max-w-6xl h-[calc(100vh-7rem)] sm:h-[calc(100vh-8rem)]'>
-          <div className='flex h-full rounded-lg overflow-hidden flex-col sm:flex-row'>
+        <div className='bg-base-100 rounded-2xl shadow-2xl w-full max-w-6xl h-[calc(100vh-7rem)] sm:h-[calc(100vh-8rem)] border border-base-300/50'>
+          <div className='flex h-full rounded-2xl overflow-hidden flex-col sm:flex-row'>
             <Sidebar/>
             {!selectedUser ? <NoChatSelected/>: <ChatContainer/>}
           </div>
