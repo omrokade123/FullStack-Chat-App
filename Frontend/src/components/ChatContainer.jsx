@@ -37,10 +37,10 @@ const ChatContainer = () => {
   )
 
   return (
-    <div className='flex-1 flex-col overflow-auto'>
+    <div className='flex-1 flex flex-col overflow-hidden'>
         <ChatHeader/>
          
-         <div className='flex-1 overflow-y-auto p-4 space-y-4'>
+         <div className='flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-4'>
           {messages.map((message) => (
           <div
             key={message._id}
@@ -64,15 +64,15 @@ const ChatContainer = () => {
                 {formatMessageTime(message.createdAt)}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col">
+            <div className="chat-bubble flex flex-col text-sm sm:text-base">
               {message.image && (
                 <img
                   src={message.image}
                   alt="Attachment"
-                  className="sm:max-w-[200px] rounded-md mb-2"
+                  className="max-w-[150px] sm:max-w-[200px] rounded-md mb-2"
                 />
               )}
-              {message.text && <p>{message.text}</p>}
+              {message.text && <p className="break-words">{message.text}</p>}
             </div>
           </div>
         ))}

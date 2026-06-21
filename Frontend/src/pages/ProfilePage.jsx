@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import { Camera, Mail, User } from 'lucide-react';
+import { Camera, Mail, User,Lock } from 'lucide-react';
 
 const ProfilePage = () => {
   const {authUser,isUpdatingProfile,updateProfile} = useAuthStore();
   const [selectedImg, setSelectedImg] = useState(null);
+  const [formData,setFormData] = useState("");
 
 
   const handleImageUpload = async(e) => {
@@ -21,6 +22,11 @@ const ProfilePage = () => {
     }
   }
   
+  const changePassword = async(e) => {
+    e.preventDefault();
+
+  }
+
   return (
     <div className='h-screen pt-20'>
       <div className='max-w-2xl mx-auto p-4 py-8'>
@@ -82,6 +88,47 @@ const ProfilePage = () => {
               <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
             </div>
           </div>
+          {/* <div className='space-y-1.5'>
+             <div className='text-2xl text-zinc-100 flex items-center gap-2'>
+              Change Password
+             </div>
+             <form onSubmit={changePassword}>
+                <div className='flex flex-row justify-between mt-3'>
+                    <div>
+                          <div className='text-sm text-zinc-400 flex items-center gap-2'>
+                            <Lock className="w-4 h-4"/>
+                            Old Password
+                        </div>
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                            <Lock className="w-5 h-5 stroke-current text-gray-500" />
+                        </div>
+                        <input
+                          className={`input input-bordered w-full pl-10 mt-1`}  
+                          placeholder="••••••••"
+                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                        />
+                    </div>
+                    <div>
+                       <div className='text-sm text-zinc-400 flex items-center gap-2'>
+                          <Lock className="w-4 h-4"/>
+                          New Password
+                        </div>
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                            <Lock className="w-5 h-5 stroke-current text-gray-500" />
+                        </div>
+                        <input
+                          className={`input input-bordered w-full pl-10 mt-1`}  
+                          placeholder="••••••••"
+                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                        />
+                    </div>  
+                    
+                </div> 
+                <br/>
+                <button type='submit' className='btn btn-primary w-full'>Change PassWord</button>
+             </form>
+             
+          </div> */}
 
           <div className="mt-6 bg-base-300 rounded-xl p-6">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
