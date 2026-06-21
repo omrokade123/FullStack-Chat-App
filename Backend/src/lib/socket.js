@@ -42,7 +42,15 @@ io.on("connection",(socket) => {
 
     socket.on("disconnect",() => {
         console.log("A user disconnected",socket.id);
-        delete userSocketMap[userId];
+        
+        // Only delete if this socket ID matches the stored socket ID for this user
+        if (userSocketMap[userId] === socket.id) {
+            delete userSocketMap[userId];
+            console.log("Deleted user from map:", userId);
+        } else {
+            console.log("Stale socket disconnect - current socket is different, not deleting");
+        }
+        
         console.log("Users after disconnect:", Object.keys(userSocketMap));
         io.emit("getOnlineUsers",Object.keys(userSocketMap));
     });
