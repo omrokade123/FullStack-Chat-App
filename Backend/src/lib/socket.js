@@ -23,13 +23,21 @@ const userSocketMap = {};
 
 io.on("connection",(socket) => {
     console.log("A user connected",socket.id);
+    console.log("Handshake query:", socket.handshake.query);
 
     const userId = socket.handshake.query.userId;
     console.log("User ID from query:", userId);
+    console.log("Type of userId:", typeof userId);
     
-    if (userId) userSocketMap[userId] = socket.id;
+    if (userId) {
+        userSocketMap[userId] = socket.id;
+        console.log("Added user to map:", userId, "->", socket.id);
+    } else {
+        console.warn("NO userId received! Query:", socket.handshake.query);
+    }
     
-    console.log("Current online users:", Object.keys(userSocketMap));
+    console.log("Current online users map:", userSocketMap);
+    console.log("Online user IDs to emit:", Object.keys(userSocketMap));
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
     socket.on("disconnect",() => {
