@@ -15,14 +15,14 @@ export const signup =async (req,res)=>{
 
       if (user) return res.status(400).json({message: "Email already axists"});
 
-      const salt = await bcrypt.genSalt(10)
+      const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password,salt);
 
       const newUser = new User({
         fullName,
         email,
         password:hashedPassword
-      })
+      })    
 
       if(newUser){
         //genrate jwt token
@@ -99,6 +99,8 @@ export const updateProfile = async(req,res)=>{
     res.status(500).json({message:"Internal server error"});
    }
 };
+
+
 
 export const checkAuth = (req,res)=>{
     try{
